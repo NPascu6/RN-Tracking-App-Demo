@@ -31,10 +31,15 @@ const signUp = dispatch => async ({ email, password }) => {
     }
 };
 
-const signIn = (dispatch) => {
-    return ({ email, password }) => {
-
-    };
+const signIn = dispatch => async ({ email, password }) => {
+    try {
+        const response = await trackerApi.post('/signin', { email, password });
+        await AsyncStorage.setItem('token', response.data.token);
+        dispatch({ type: 'sing_in', payload: response.data.token });
+        navigate('TrackList');
+    } catch (err) {
+        dispatch({ type: 'signup_error', payload: 'Could not sign up.' });
+    }
 };
 
 const signOut = (dispatch) => {

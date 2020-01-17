@@ -40,21 +40,12 @@ const AuthentificationForm = ({ headerText, errorMessage, onSubmit, buttonText }
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        marginBottom: 250
-    },
     errorMessage: {
         fontSize: 16,
         color: 'red',
         marginLeft: 15,
         marginTop: 15,
         alignSelf: 'center'
-    },
-    link: {
-        color: 'blue',
-        fontSize: 20
     }
 });
 
