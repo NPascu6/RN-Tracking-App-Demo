@@ -4,7 +4,7 @@ import { Context as AuthentificationContext } from '../context/AuthentificationC
 import AuthentificationForm from '../components/AuthentificationForm';
 import NavLink from '../components/NavLink';
 
-const SigninScreen = ({ navigation }) => {
+const SigninScreen = () => {
     const { state, signIn } = useContext(AuthentificationContext);
 
     return (

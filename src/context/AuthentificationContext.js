@@ -5,12 +5,12 @@ import { navigate } from '../helpers/navigationRef';
 
 const authentificationReducer = (state, action) => {
     switch (action.type) {
-        case 'sign_up':
+        case 'sign_in':
             return {
                 errorMessage: '',
                 token: action.payload
             }
-        case 'signup_error':
+        case 'error':
             return {
                 ...state,
                 errorMessage: action.payload
@@ -24,10 +24,10 @@ const signUp = dispatch => async ({ email, password }) => {
     try {
         const response = await trackerApi.post('/signup', { email, password });
         await AsyncStorage.setItem('token', response.data.token);
-        dispatch({ type: 'sign_up', payload: response.data.token });
+        dispatch({ type: 'sign_in', payload: response.data.token });
         navigate('TrackList');
     } catch (err) {
-        dispatch({ type: 'signup_error', payload: 'Could not sign up.' });
+        dispatch({ type: 'error', payload: 'Could not sign up.' });
     }
 };
 
@@ -38,7 +38,7 @@ const signIn = dispatch => async ({ email, password }) => {
         dispatch({ type: 'sing_in', payload: response.data.token });
         navigate('TrackList');
     } catch (err) {
-        dispatch({ type: 'signup_error', payload: 'Could not sign up.' });
+        dispatch({ type: 'error', payload: 'Could not log in.' });
     }
 };
 
@@ -47,7 +47,6 @@ const signOut = (dispatch) => {
 
     };
 };
-
 
 export const { Provider, Context } = dataContextCreator(
     authentificationReducer,
