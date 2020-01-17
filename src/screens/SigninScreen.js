@@ -3,12 +3,16 @@ import { StyleSheet, View } from 'react-native';
 import { Context as AuthentificationContext } from '../context/AuthentificationContext';
 import AuthentificationForm from '../components/AuthentificationForm';
 import NavLink from '../components/NavLink';
+import { NavigationEvents } from 'react-navigation';
 
 const SigninScreen = () => {
-    const { state, signIn } = useContext(AuthentificationContext);
+    const { state, signIn, clearErrorMessage } = useContext(AuthentificationContext);
 
     return (
         <View style={styles.container}>
+            <NavigationEvents
+                onWillBlur={clearErrorMessage}
+            />
             <AuthentificationForm
                 headerText={'Sign into your Tracker Account'}
                 buttonText={'Log In'}

@@ -3,12 +3,16 @@ import { StyleSheet, View } from 'react-native';
 import { Context as AuthentificationContext } from '../context/AuthentificationContext';
 import AuthentificationForm from '../components/AuthentificationForm';
 import NavLink from '../components/NavLink';
+import { NavigationEvents } from 'react-navigation';
 
-const SignupScreen = ({ navigation }) => {
-    const { state, signUp } = useContext(AuthentificationContext);
-    
+const SignupScreen = () => {
+    const { state, signUp, clearErrorMessage } = useContext(AuthentificationContext);
+
     return (
         <View style={styles.container}>
+            <NavigationEvents
+                onWillBlur={clearErrorMessage}
+            />
             <AuthentificationForm
                 headerText={'Sign Up to Tracker'}
                 buttonText={'Sign UP'}
